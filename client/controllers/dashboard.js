@@ -1,5 +1,152 @@
 var myApp = angular.module('myApp');
 
-myApp.controller('DashboardController', ['$scope', '$http', '$location', function($scope, $http, $location) {
-	console.log('dashboard controller initialized');
+myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmapGoogleMapApi',  function($scope, $http, $location,uiGmapGoogleMapApi) {
+	
+	//API call for yelp
+	$scope.getYelps = function() {
+
+		//make a request to the backend.
+		$http.get('/json').success(function(response) {
+			console.log(response);
+
+			//set up the scope window
+			$scope.items = response.businesses;
+			$scope.windowOptions = {
+				visible: false
+			};
+
+			//marker window opens / closes on click
+			$scope.onClick = function() {
+				$scope.windowOptions.visible = !$scope.windowOptions.visible;
+			};
+
+			$scope.closeClick = function() {
+				$scope.windowOptions.visible = false;
+			};
+
+			//set up variables for the views
+			$scope.title = response.businesses[0].name;
+			$scope.phone= response.businesses[0].display_phone;
+			$scope.image= response.businesses[0].image_url;
+			$scope.rating = response.businesses[0].rating_img_url;
+			$scope.url = response.businesses[0].url;
+			$scope.street = response.businesses[0].location.address[0];
+			$scope.zip = response.businesses[0].location.postal_code;
+		});
+	}
+
+	//set map center coordaintes.
+	$scope.map = { center: { latitude: 37.76, longitude: -122.44 }, zoom: 12 };
+
+	//set up an empty lines array
+	$scope.polylines = [];
+
+	//The pay line of the run.
+	uiGmapGoogleMapApi.then(function(){
+		$scope.polylines = [
+		{
+			id: 1,
+			path: [
+			{
+				latitude: 37.7608638,
+				longitude: -122.4660961
+			},
+			{
+				latitude: 37.7621336,
+				longitude: -122.4661788
+			},
+			{
+				latitude: 37.762316,
+				longitude: -122.462972
+			},
+			{
+				latitude: 37.765122,
+				longitude: -122.4631679
+			},
+			{
+				latitude: 37.7652594,
+				longitude: -122.4599554
+			},
+			{
+				latitude: 37.7661587,
+				longitude: -122.4598928
+			},
+			{
+				latitude: 37.769055,
+				longitude: -122.4547682
+			},
+			{
+				latitude: 37.7690402,
+				longitude: -122.4547294
+			},
+			{
+				latitude: 37.7696845,
+				longitude: -122.4539492
+			},
+			{
+				latitude: 37.770067,
+				longitude: -122.4540343
+			},
+			{
+				latitude: 37.7743488,
+				longitude: -122.4203938
+			},
+			{
+				latitude: 37.7888201,
+				longitude: -122.4019967
+			},
+			{
+				latitude: 37.790976,
+				longitude: -122.4024281
+			},
+			{
+				latitude: 37.7910773,
+				longitude: -122.4016291
+			}
+			],
+			stroke: {
+				color: '#6060FB',
+				weight: 3
+			},
+			editable: true,
+			draggable: true,
+			geodesic: true,
+			visible: true,
+			icons: [{
+				icon: {
+					path: google.maps.SymbolPath.FORWARD_OPEN_ARROW
+				},
+				offset: '25px',
+				repeat: '50px'
+			}]
+		}
+		];
+	});
+
+	//Put a marker of the closest restaurant
+	$scope.marker = {
+		id: 0,
+		coords: {
+			latitude:  37.7910773,
+			longitude: -122.4016291
+		},
+		options: { draggable: true, label: 'b' },
+		events: {
+			dragend: function (marker, eventName, args) {
+				$log.log('marker dragend');
+				var lat = marker.getPosition().lat();
+				var lon = marker.getPosition().lng();
+				$log.log(lat);
+				$log.log(lon);
+
+				$scope.marker.options = {
+					draggable: true,
+					labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+					labelAnchor: "100 0",
+					labelClass: "marker-labels"
+				};
+			}
+		}
+	};
+
 }]);

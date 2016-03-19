@@ -1,2 +1,61 @@
-<h2 class="sub-header">Dashboard</h2>
-<p>This is the dashboard area for Node Invoicer. Please use the options in the side and top menu.</p>
+<div ng-init="getYelps()">
+<!-- 	<ul ng-repeat="item in items">
+		<li>{{ item.display_phone }}</li>
+	</ul> -->
+	<div class="pull-left half">
+		<p class="lead">Start Location</p>
+		<p>1471 9th Avenue, San Francisco, CA 94112</p>
+		<br>
+		<br>
+		<p class="lead">Brunch</p>
+		<p><strong>Little Griddle</strong></p>
+		<p>{{street}} San Francisco, CA {{zip}}</p>
+	</div>
+	<div class="pull-left left-aligned half">
+		<p class="lead">Estimated Time</p>
+		<p>33 Minutes</p>
+		<br>
+		<br>
+		<p class="lead">Distance</p>
+		<p>4.7 Miles</p>
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<div ng-init="callMap">
+	<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+		<ui-gmap-polyline ng-repeat="p in polylines" path="p.path" stroke="p.stroke" visible='p.visible'
+	geodesic='p.geodesic' fit="false" editable="p.editable" draggable="p.draggable" icons='p.icons'>
+		</ui-gmap-polyline>
+		<ui-gmap-marker coords="marker.coords" title="marker.title" options="marker.options" events="marker.events" idkey="marker.id">
+	<ui-gmap-window options="windowOptions" closeClick="closeClick()">
+		<div>
+
+			<strong>{{title}}</strong>
+			<br>
+			<br>
+			Phone: {{phone}}
+			<br>
+			<br>
+			<img src={{image}} />
+			<br>
+			<br>
+			Rating: <img src={{rating}} />
+			<br>
+			<br>
+			<a href={{url}}>Link</a>
+		</div>
+	</ui-gmap-window>
+	</ui-gmap-marker>
+	</ui-gmap-google-map>
+
+</div>
+<br>
+<br>
+<div class="pull-left">
+	<p class="lead">You should leave by:</p>
+	<p>8:45 AM</p>
+</div>
+<br>
+<a class="btn btn-default pull-right" href="#">Invite Friends</a>

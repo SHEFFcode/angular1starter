@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-  	"express": "*",
-  	"mongoose": "*",
-  	"body-parser": "*"
+    "body-parser": "*",
+    "express": "*",
+    "mongoose": "*",
+    "yelp": "^1.0.1"
   },
   "author": "Jeremy Shefer",
   "license": "ISC"

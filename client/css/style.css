@@ -11,6 +11,8 @@ body {
   width: 115px;
 }
 
+.angular-google-map-container { height: 400px; }
+
 /*
  * Global add-ons
  */
@@ -109,4 +111,52 @@ body {
 
 .navbar-inverse .navbar-brand {
   color: #fff;
+}
+
+.navbar-default{
+  background-color: #26ADED;
+  border-color: #26ADED;
+}
+
+.logo-image {
+  width: 80%;
+}
+
+.lead {
+  font-family: 'Quicksand', sans-serif;
+  color: #26ADED;
+}
+
+.navbar-brand {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.btn-default {
+  background-color: #26ADED;
+  border-color: #26ADED;
+}
+
+.left-aligned {
+  text-align: right;
+}
+
+.half {
+  width: 50%;
+}
+
+.large-text {
+  font-size: 2em;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar-header {
+  text-align: center;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
 }
