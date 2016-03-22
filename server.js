@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var customers =	require('./routes/customers');
-var invoices = require('./routes/invoices');
 var PORT = process.env.PORT || 7000;
 var Yelp = require('yelp');
 
