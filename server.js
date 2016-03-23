@@ -4,7 +4,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var PORT = process.env.PORT || 7000;
 var Yelp = require('yelp');
-
+var runners =	require('./routes/runners');
+var runs = require('./routes/runs');
 
 app.get('/json', function(req, res) {
 	(function(i){
@@ -31,12 +32,16 @@ app.get('/json', function(req, res) {
 });
 
 //Mongoose Connection
-mongoose.connect('mongodb://sheff:123@ds019058.mlab.com:19058/invoice');
+mongoose.connect('mongodb://sheff:123@ds019839.mlab.com:19839/runandbrunch');
 var db = mongoose.conneciton;
 
 //specify a static directory for express to use
 app.use(express.static(__dirname + '/client'));
 app.use(bodyParser.json());
+
+//Routes
+app.use('/api/runners', runners);
+app.use('/api/runs', runs);
 
 app.get('/', function(req, res) {
 	res.send('Hello world');

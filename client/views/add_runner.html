@@ -1,0 +1,25 @@
+<h2 class="sub-header">Add Runner</h2>
+<form ng-submit="addRunner()">
+	<div class="form-group">
+		<label>First Name</label>
+		<input type="text" class="form-control" name="first_name" ng-model="runner.first_name" placeholder="First Name"></input>
+	</div>
+	<div class="form-group">
+		<label>Last Name</label>
+		<input type="text" class="form-control" name="last_name" ng-model="runner.last_name" placeholder="Last Name"></input>
+	</div>
+	<div class="form-group">
+		<label>Email</label>
+		<input type="email" class="form-control" name="email" ng-model="runner.email" placeholder="Email"></input>
+	</div>
+	<div class="form-group">
+		<label>Logo Url</label>
+		<input type="text" class="form-control" name="photo_url" ng-model="runner.photo_url" placeholder="Photo URL"></input>
+	</div>
+	
+	<div class="form-group">
+		<label>Neighborhood</label>
+		<input type="text" class="form-control" name="neighborhood" ng-model="runner.neighborhood" placeholder="Neighborhood"></input>
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>
+</form>
