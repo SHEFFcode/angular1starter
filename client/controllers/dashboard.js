@@ -3,7 +3,7 @@ var myApp = angular.module('myApp');
 myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmapGoogleMapApi', 'Facebook',  function($scope, $http, $location,uiGmapGoogleMapApi, Facebook) {
 	
 
-	var ABSOLUTE_URI = "http://runandbrunch.herokuapp.com/";
+	var ABSOLUTE_URI = "https://runandbrunch.herokuapp.com/#/";
 	var FB_ID = "1062941333748037";
 
 	$scope.IntentLogin = function openFBLoginDialogManually(){
