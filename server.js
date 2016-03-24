@@ -7,7 +7,7 @@ var Yelp = require('yelp');
 var runners =	require('./routes/runners');
 var runs = require('./routes/runs');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 app.get('/json', function(req, res) {
 	(function(i){
@@ -32,6 +32,40 @@ app.get('/json', function(req, res) {
 	})();
 
 });
+
+
+//Google Authentication
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+passport.use(new GoogleStrategy({
+    clientID: '141240246742-scoggs7ot72a8lob81jpspv9v9ap0s3q.apps.googleusercontent.com',
+    clientSecret: 'QWJRpmIZ-WJNa4yXUBHvP38Z',
+    callbackURL: "/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 //Mongoose Connection
 mongoose.connect('mongodb://sheff:123@ds019839.mlab.com:19839/runandbrunch');
