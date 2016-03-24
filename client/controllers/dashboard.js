@@ -3,12 +3,31 @@ var myApp = angular.module('myApp');
 myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmapGoogleMapApi', 'Facebook',  function($scope, $http, $location,uiGmapGoogleMapApi, Facebook) {
 	
 
-	$scope.IntentLogin = function() {
-      // From now on you can use the Facebook service just as Facebook api says
-      Facebook.login(function(response) {
-        // Do something with response.
-      });
-    };
+	var ABSOLUTE_URI = "http://runandbrunch.herokuapp.com/#";
+	var FB_ID = "1062941333748037";
+
+	$scope.IntentLogin = function openFBLoginDialogManually(){
+  		// Open your auth window containing FB auth page 
+  		// with forward URL to your Opened Window handler page (below)
+  
+  		var redirect_uri = "&redirect_uri=" + ABSOLUTE_URI + "fbjscomplete";
+  		var scope = "&scope=public_profile,email,user_friends";
+  		var url = "https://www.facebook.com/dialog/oauth?client_id=" + FB_ID + redirect_uri + scope;
+
+  		// notice the lack of other param in window.open
+  		// for some reason the opener is set to null
+  		// and the opened window can NOT reference it
+  		// if params are passed. #Chrome iOS Bug
+  		window.open(url);
+
+	}
+
+	// $scope.IntentLogin = function() {
+ //      // From now on you can use the Facebook service just as Facebook api says
+ //      Facebook.login(function(response) {
+ //        // Do something with response.
+ //      });
+ //    };
 
     $scope.getLoginStatus = function() {
       Facebook.getLoginStatus(function(response) {
