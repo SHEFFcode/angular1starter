@@ -152,11 +152,3 @@ body {
     display: inline-block;
     float: none;
 }
-
-.navbar-header {
-  text-align: center;
-}
-
-.navbar .navbar-collapse {
-    text-align: center;
-}

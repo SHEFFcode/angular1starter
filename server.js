@@ -6,6 +6,8 @@ var PORT = process.env.PORT || 7000;
 var Yelp = require('yelp');
 var runners =	require('./routes/runners');
 var runs = require('./routes/runs');
+var passport = require('passport');
+var GoogleStrategy = require('passport-google').Strategy;
 
 app.get('/json', function(req, res) {
 	(function(i){
@@ -46,6 +48,17 @@ app.use('/api/runs', runs);
 app.get('/', function(req, res) {
 	res.send('Hello world');
 });
+
+app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google/return',
+  passport.authenticate('google', { successRedirect: '/',
+                                    failureRedirect: '/login' }));
+
+
+
+
+
+
 
 app.listen(PORT);
 console.log('Server started on port ....' + PORT);

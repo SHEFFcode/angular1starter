@@ -10,6 +10,9 @@
     "body-parser": "*",
     "express": "*",
     "mongoose": "*",
+    "passport": "^0.3.2",
+    "passport-google": "^0.3.0",
+    "passport-google-oauth": "^1.0.0",
     "yelp": "^1.0.1"
   },
   "author": "Jeremy Shefer",
