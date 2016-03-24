@@ -3,7 +3,7 @@ var myApp = angular.module('myApp');
 myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmapGoogleMapApi', 'Facebook',  function($scope, $http, $location,uiGmapGoogleMapApi, Facebook) {
 	
 
-	$scope.login = function() {
+	$scope.IntentLogin = function() {
       // From now on you can use the Facebook service just as Facebook api says
       Facebook.login(function(response) {
         // Do something with response.
