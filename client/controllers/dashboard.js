@@ -42,6 +42,7 @@ myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmap
     $scope.me = function() {
       Facebook.api('/me', function(response) {
         $scope.user = response;
+        console.log(response);
       });
     };
 
