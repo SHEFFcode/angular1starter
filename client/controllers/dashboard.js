@@ -1,15 +1,30 @@
 var myApp = angular.module('myApp');
 
-myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmapGoogleMapApi', 'Facebook',  function($scope, $http, $location,uiGmapGoogleMapApi, Facebook) {
+myApp.controller('DashboardController', ['$scope', '$http', '$location', '$routeParams', 'NgMap', 'uiGmapGoogleMapApi', 'Facebook',  function($scope, $http, $location, $routeParams, NgMap, uiGmapGoogleMapApi, Facebook) {
 	
+	
+	NgMap.getMap().then(function(map) {
+		console.log(map.getCenter());
+		console.log('markers', map.markers);
+		console.log('shapes', map.shapes);
+		$scope.map = map;
+		console.log('this happens');
+	});
 
-	var ABSOLUTE_URI = "https://runandbrunch.herokuapp.com/";
-	var FB_ID = "1062941333748037";
 
-	$scope.IntentLogin = function openFBLoginDialogManually(){
+		$scope.$watch('map', function(newValue, oldValue){
+			console.log($scope.map);
+		});
+
+		$scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjYwP0Fs_DJqPA92Op0dHHgbMXhyXdn4A";
+
+		var ABSOLUTE_URI = "https://runandbrunch.herokuapp.com/";
+		var FB_ID = "1062941333748037";
+
+		$scope.IntentLogin = function openFBLoginDialogManually(){
   		// Open your auth window containing FB auth page 
   		// with forward URL to your Opened Window handler page (below)
-  
+
   		var redirect_uri = "&redirect_uri=" + ABSOLUTE_URI + "fbjscomplete";
   		var scope = "&scope=public_profile,email,user_friends";
   		var url = "https://www.facebook.com/dialog/oauth?client_id=" + FB_ID + redirect_uri + scope;
@@ -20,7 +35,7 @@ myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmap
   		// if params are passed. #Chrome iOS Bug
   		window.open(url);
 
-	}
+  	}
 
 	// $scope.IntentLogin = function() {
  //      // From now on you can use the Facebook service just as Facebook api says
@@ -29,22 +44,22 @@ myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmap
  //      });
  //    };
 
-    $scope.getLoginStatus = function() {
-      Facebook.getLoginStatus(function(response) {
-        if(response.status === 'connected') {
-          $scope.loggedIn = true;
-        } else {
-          $scope.loggedIn = false;
-        }
-      });
-    };
+ $scope.getLoginStatus = function() {
+ 	Facebook.getLoginStatus(function(response) {
+ 		if(response.status === 'connected') {
+ 			$scope.loggedIn = true;
+ 		} else {
+ 			$scope.loggedIn = false;
+ 		}
+ 	});
+ };
 
-    $scope.me = function() {
-      Facebook.api('/me', function(response) {
-        $scope.user = response;
-        console.log(response);
-      });
-    };
+ $scope.me = function() {
+ 	Facebook.api('/me', function(response) {
+ 		$scope.user = response;
+ 		console.log(response);
+ 	});
+ };
 
 
 	//API call for yelp
@@ -167,6 +182,18 @@ myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmap
 		}
 		];
 	});
+
+	//get invoice details
+	$scope.getRun = function() {
+		var id = $routeParams.id;
+		console.log($routeParams.id);
+		$http.get('/api/runs/' + id).success(function(response) {
+			$scope.run = response;
+
+		//Fill Select
+		$scope.run.runner_id = response.runner._id;
+	});
+	}
 
 	//Put a marker of the closest restaurant
 	$scope.marker = {

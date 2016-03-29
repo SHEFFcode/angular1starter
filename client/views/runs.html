@@ -14,7 +14,7 @@
 		<tbody>
 			<tr ng-repeat="run in runs">
 				<td>{{run.runner.first_name}} {{run.runner.last_name}}</td>
-				<td>{{run.name}}</td>
+				<td><a href="#/runs/details/{{run._id}}">{{run.name}}</a></td>
 				<td>{{run.hood}}</td>
 				<td>{{run.distance}}</td>
 				<td>{{run.brunches}}</td>
