@@ -52,7 +52,7 @@
 
 </div> -->
 
-<div ng-mousemove="mapUpdate()" map-lazy-load="https://maps.google.com/maps/api/js"
+<div ng-mousemove="mapUpdate()" ng-mousedown="mapUpdate" map-lazy-load="https://maps.google.com/maps/api/js"
 map-lazy-load-params="{{googleMapsUrl}}">
 	<ng-map zoom="14" center="San Francisco, CA" zoom="3">
 		<directions
