@@ -1,0 +1,26 @@
+<h2 class="sub-header">Runs</h2>
+<div class="table-responsive" ng-init="getRuns()">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Host</th>
+				<th>Name</th>
+				<th>Hood</th>
+				<th>Distance</th>
+				<th>Brunch</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="run in runs">
+				<td>{{run.runner.first_name}} {{run.runner.last_name}}</td>
+				<td>{{run.name}}</td>
+				<td>{{run.hood}}</td>
+				<td>{{run.distance}}</td>
+				<td>{{run.brunches}}</td>
+				<td><a href="#/invoices/details/{{invoice._id}}" class="btn btn-primary">Details</a><a href="#/invoices/edit/{{invoice._id}}" class="btn btn-default">Edit</a><button id="deleteInvoice" ng-click="deleteInvoice(invoice._id)" class="btn btn-danger">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>

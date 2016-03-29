@@ -9,11 +9,13 @@
   "dependencies": {
     "body-parser": "*",
     "express": "*",
+    "http-request": "^0.7.0",
     "mongoose": "*",
     "passport": "^0.3.2",
     "passport-google": "^0.3.0",
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
+    "request": "^2.69.0",
     "yelp": "^1.0.1"
   },
   "author": "Jeremy Shefer",

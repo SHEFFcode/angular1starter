@@ -29,7 +29,7 @@ router.get('/:id', function(req, res) {
 //Add invoice
 router.post('/', function(req, res) {
 	var run = req.body;
-	Run.addInvoice(run, function(err, run) {
+	Run.addRun(run, function(err, run) {
 		if (err) {
 			res.send(err);
 		} else {

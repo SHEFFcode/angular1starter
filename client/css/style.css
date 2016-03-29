@@ -120,6 +120,7 @@ body {
 
 .logo-image {
   width: 80%;
+  margin: 0 auto;
 }
 
 .lead {
@@ -151,4 +152,22 @@ body {
 .navbar .navbar-nav {
     display: inline-block;
     float: none;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #26ADED;
+  border-color: #ffffff;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #ffffff;
 }

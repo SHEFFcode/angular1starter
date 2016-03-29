@@ -1,10 +1,10 @@
-var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps', 'directive.g+signin', 'facebook']);
+var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps', 'facebook']);
 
 //configure the router
 myApp.config(function($routeProvider, FacebookProvider) {
 	$routeProvider.when('/', {
 		controller: 'DashboardController',
-		templateUrl: 'views/login.html'
+		templateUrl: 'views/dashboard.html'
 	})
 	$routeProvider.when('/dashboard', {
 		controller: 'DashboardController',
@@ -14,9 +14,17 @@ myApp.config(function($routeProvider, FacebookProvider) {
 		controller: 'RunnersController',
 		templateUrl: 'views/add_runner.html'
 	})
+	$routeProvider.when('/addrun', {
+		controller: 'RunsController',
+		templateUrl: 'views/add_run.html'
+	})
 	$routeProvider.when('/runners', {
 		controller: 'RunnersController',
 		templateUrl: 'views/runners.html'
+	})
+	$routeProvider.when('/runs', {
+		controller: 'RunsController',
+		templateUrl: 'views/runs.html'
 	})
 	.otherwise({
 		redirectTo: '/'

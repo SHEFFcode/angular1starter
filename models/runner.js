@@ -11,14 +11,14 @@ var runnerSchema = mongoose.Schema({
 		required: true
 	},
 	email: {
-		type: String
+		type: String,
+		required: true
 	},
 	photo_url: {
 		type: String
 	},
 	neighborhood: {
 		type: String,
-		required: true
 	}
 });
 
@@ -45,6 +45,17 @@ module.exports.addRunner = function(runner, callback) {
 	}
 	Runner.create(add, callback);
 };
+
+module.exports.addGoogleRunner = function(runner, callback) {
+	var add = {
+		first_name: runner.name.givenName,
+		last_name: runner.name.familyName,
+		email: runner.emails.value
+	}
+	console.log('runner added');
+	Runner.create(add, callback);
+
+}
 
 //Update a runner
 module.exports.updateRunner = function(id, runner, options, callback) {

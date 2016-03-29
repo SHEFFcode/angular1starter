@@ -1,12 +1,23 @@
 var myApp = angular.module('myApp');
 
 myApp.controller('RunsController', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams) {
-	console.log('Runners controller initialized');
+	console.log('Runs controller initialized');
 
 	//get invoices
-	$scope.getInvoices = function() {
+	$scope.getRuns = function() {
 		$http.get('/api/runs').success(function(response) {
 			$scope.runs = response;
+		});
+	}
+
+	$scope.getBrunch = function(location) {
+		$http.get('/json/:' + location).success(function(response) {
+			$scope.run.brunch = [];
+			for (i=0; i<response.businesses.length; i++) {
+				$scope.run.brunch.push(response.businesses[i].name);	
+			}
+			console.log($scope.run.brunch);
+					
 		});
 	}
 
@@ -18,7 +29,6 @@ myApp.controller('RunsController', ['$scope', '$http', '$location', '$routeParam
 
 		//Fill Select
 		$scope.run.runner_id = response.runner._id;
-		$scope.run.status = response.runner.status;
 	});
 	}
 

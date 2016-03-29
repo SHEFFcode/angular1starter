@@ -6,23 +6,30 @@ var runSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Runner'
 	},
-	length: {
+	name: {
 		type: String,
 		required: true
 	},
-	startTime: {
+	hood: {
+		type: String,
+		required: true
+	},
+	start: {
+		type: String,
+		required: true
+	},
+	end: {
+		type: String,
+		required: true
+	},
+	distance: {
 		type: String
 	},
-	runRoute: {
-		type: Array
+	brunches: {
+		type: String
 	},
-	status: {
-		type: String,
-		required: true
-	},
-	createdAt: {
-		type: Date,
-		default: Date.now
+	date: {
+		type: String
 	}
 });
 
@@ -42,11 +49,13 @@ module.exports.getRunById = function(id, callback) {
 module.exports.addRun = function(run, callback) {
 	var add = {
 		runner: run.runner_id,
-		length: run.length,
-		startTime: run.startTime,
-		runRoute: run.runRoute,
-		status: run.status,
-		createdAt: run.createdAt
+		name: run.name,
+		hood: run.hood,
+		start: run.start,
+		end: run.end,
+		distance: run.distance,
+		brunches: run.brunches,
+		date: run.date
 	}
 	Run.create(add, callback);
 };
@@ -55,11 +64,14 @@ module.exports.addRun = function(run, callback) {
 module.exports.updateRun = function(id, run, options, callback) {
 	var query = {_id: id};
 	var update = {
-		length: run.length,
-		startTime: run.startTime,
-		runRoute: run.runRoute,
-		status: run.status,
-		createdAt: run.createdAt
+		runner: run.runner_id,
+		name: run.name,
+		hood: run.hood,
+		start: run.start,
+		end: run.end,
+		distance: run.distance,
+		brunches: run.brunches,
+		date: run.date
 	}
 	Run.findOneAndUpdate(query, update, options, callback);
 };

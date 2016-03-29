@@ -46,13 +46,6 @@ myApp.controller('DashboardController', ['$scope', '$http', '$location', 'uiGmap
       });
     };
 
-	$scope.$on('event:google-plus-signin-success', function (event,authResult) {
-    // Send login to server or save into cookie
-  });
-  $scope.$on('event:google-plus-signin-failure', function (event,authResult) {
-    // Auth failure or signout detected
-  });
-
 
 	//API call for yelp
 	$scope.getYelps = function() {

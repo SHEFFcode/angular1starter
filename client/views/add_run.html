@@ -1,0 +1,73 @@
+<h2 class="sub-header">New Run</h2>
+<form ng-submit="addRun()" ng-init="getRunners()">
+	<div class="form-group">
+		<label>Host</label>
+		<select class="form-control" ng-model="run.runner_id" placeholder="Service">
+			<option ng-repeat="runner in runners" value="{{runner._id}}">
+				{{runner.first_name}} {{runner.last_name}}
+			</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Run Name</label>
+		<input type="text" class="form-control" name="run_name" ng-model="run.name" placeholder="Run Name"></input>
+	</div>
+	<div class="form-group">
+		<label>Neighborhood</label>
+		<select class="form-control" ng-model="run.hood">
+			<option value="presidio">Presidio</option>
+			<option value="marina">Marina</option>
+			<option value="fishermans">Fisherman's Warf</option>
+			<option value="russian">Russian Hill</option>
+			<option value="nb">North Beach</option>
+			<option value="financial">Financial District</option>
+			<option value="china">China Town</option>
+			<option value="nob">Nob Hill</option>
+
+			<option value="down">Downtown</option>
+			<option value="western">Western Addition</option>
+			<option value="richmond">Richmond District</option>
+			<option value="gold">Golden Gate Park</option>
+			<option value="high">Height</option>
+			<option value="soma">South of Market</option>
+			<option value="port">Port</option>
+			<option value="ph">Potreo Hill</option>
+
+			<option value="mission">Mission District</option>
+			<option value="castro">Castro</option>
+			<option value="noe">Noe Valley</option>
+			<option value="bh">Bernel Heights</option>
+			<option value="twins">Twin Peaks</option>
+			<option value="sunset">Sunset District</option>
+			<option value="lake">Lake Merced</option>
+			<option value="is">Ingelside</option>
+			<option value="ex">Excelizor</option>
+			<option value="hp">Hunter's Point</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Start Address</label>
+		<input type="text" class="form-control" name="run_start" ng-model="run.start" placeholder="Start Address"></input>
+	</div>
+	<div class="form-group">
+		<label>End Address</label>
+		<input type="text" class="form-control" name="run_end" ng-model="run.end" placeholder="End Address"></input>
+	</div>
+	<a class="btn btn-default" ng-click="getBrunch(run.end)">Find Brunch</a>
+	<div class="form-group">
+		<label>Restaurant</label>
+		<select class="form-control" ng-model="run.brunches" placeholder="Brunch Places" ng-options="val for val in run.brunch">
+			<option value=''>
+			</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Distance</label>
+		<input type="text" class="form-control" name="distance" ng-model="run.distance" placeholder="Distance"></input>
+	</div>
+	<div class="form-group">
+		<label>Date</label>
+		<input type="text" class="form-control" name="date" ng-model="run.date" placeholder="Run Date"></input>
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>
+</form>
