@@ -1,5 +1,5 @@
-<h2 class="sub-header">Runs</h2>
-<div class="table-responsive" ng-init="getRuns()">
+<h2 class="sub-header">My Runs</h2>
+<div class="table-responsive" ng-init="getRunnerRuns()">
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -12,13 +12,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="run in runs">
+			<tr ng-repeat="run in runner_runs">
 				<td>{{run.runner.first_name}} {{run.runner.last_name}}</td>
 				<td><a href="#/runs/details/{{run._id}}">{{run.name}}</a></td>
 				<td>{{run.hood}}</td>
 				<td>{{run.distance}}</td>
 				<td>{{run.brunches}}</td>
-				<td><a href="#/invoices/details/{{invoice._id}}" class="btn btn-primary">Join</a></td>
+				<td><a href="#/invoices/details/{{invoice._id}}" class="btn btn-primary">Details</a><a href="#/invoices/edit/{{invoice._id}}" class="btn btn-default">Edit</a><button id="deleteInvoice" ng-click="deleteInvoice(invoice._id)" class="btn btn-danger">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

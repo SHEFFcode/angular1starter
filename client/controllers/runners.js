@@ -20,9 +20,9 @@ myApp.controller('RunnersController', ['$scope', '$http', '$location', '$routePa
 
 	//get customers
 	$scope.getRunnerRuns = function() {
-		var id = $routeParams.id;
+		var id = $routeParams.id || '56f314b82f2f0e259ea8d44e';
 		$http.get('/api/runs/runner/' + id).success(function(response) {
-			$scope.runner_invoices = response;
+			$scope.runner_runs = response;
 		});
 	}
 

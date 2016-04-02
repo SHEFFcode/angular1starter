@@ -97,13 +97,17 @@ app.get('/auth/google/callback',
     res.redirect('http://localhost:7000/#/');
 });
 
+
 function loggedIn(req, res, next) {
+    
     if (req.user) {
         next();
     } else {
         res.redirect('#/login');
     }
+
 }
+
 
 app.get('/', loggedIn, function(req, res, next) {
     res.send('Hello world');

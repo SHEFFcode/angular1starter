@@ -4,11 +4,11 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngMap', 'uiGmapgoogle-maps', 'f
 myApp.config(function($routeProvider, FacebookProvider) {
 	$routeProvider.when('/', {
 		controller: 'DashboardController',
-		templateUrl: 'views/dashboard.html'
+		templateUrl: 'views/login.html'
 	})
 	$routeProvider.when('/dashboard', {
-		controller: 'DashboardController',
-		templateUrl: 'views/runs.html'
+		controller: 'RunnersController',
+		templateUrl: 'views/newdashboard.html'
 	})
 	$routeProvider.when('/signup', {
 		controller: 'RunnersController',
@@ -25,6 +25,10 @@ myApp.config(function($routeProvider, FacebookProvider) {
 	$routeProvider.when('/runs', {
 		controller: 'RunsController',
 		templateUrl: 'views/runs.html'
+	})
+	$routeProvider.when('/runs/:id', {
+		controller: 'RunnersController',
+		templateUrl: 'views/my_runs.html'
 	})
 	$routeProvider.when('/runs/details/:id', {
 		controller: 'DashboardController',

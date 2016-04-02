@@ -66,7 +66,7 @@ router.delete('/:id', function(req, res) {
 //Get all invoices for a single customer
 router.get('/runner/:runner_id', function(req, res) {
 	var runner_id = req.params.runner_id;
-	Run.getRunnerRun(runner_id, function(err, runs){
+	Run.getRunnerRuns(runner_id, function(err, runs){
 		if (err) {
 			res.send(err);
 		} else {
