@@ -1,6 +1,6 @@
 var myApp = angular.module('myApp');
 
-myApp.controller('RunnersController', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams) {
+myApp.controller('RunnersController', ['$scope', '$http', '$location', '$routeParams', 'weatherService', function($scope, $http, $location, $routeParams, weatherService) {
 	console.log('runners controller initialized');
 
 	//get customers
@@ -45,4 +45,13 @@ myApp.controller('RunnersController', ['$scope', '$http', '$location', '$routePa
 			window.location.href = '#/runners';
 		});
 	}
+
+	//Weather
+    $scope.weatherResult = weatherService.getWeather();
+    $scope.convertToFarenheit = function(degK){
+        return Math.round((1.8 * (degK - 273)) + 32);
+    }
+    $scope.convertToDate = function(dt){
+        return new Date(dt * 1000);
+    }
 }]);

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngMap', 'uiGmapgoogle-maps', 'facebook']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMap', 'ngResource', 'uiGmapgoogle-maps', 'facebook', 'angular-weather', 'LocalForageModule']);
 
 //configure the router
 myApp.config(function($routeProvider, FacebookProvider) {
