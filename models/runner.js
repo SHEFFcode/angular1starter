@@ -23,7 +23,7 @@ var runnerSchema = mongoose.Schema({
 		type: String
 	},
 	neighborhood: {
-		type: String,
+		type: String
 	}
 });
 

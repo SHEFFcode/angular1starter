@@ -133,7 +133,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
 
     if(profile){
-      Runner.findOrCreate({ runner_id: profile.id }, {first_name: profile.displayName, email: profile.emails[0].value, access: 'Admin'}, function (err, user) {
+      Runner.findOrCreate({ runner_id: profile.id }, {first_name: profile.displayName, email: profile.emails[0].value}, function (err, user) {
         return done(err, user);
       });
 
