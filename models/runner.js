@@ -1,14 +1,19 @@
 var mongoose = require('mongoose');
+findOrCreate = require('mongoose-findorcreate');
 
 //Runner Schema
 var runnerSchema = mongoose.Schema({
+	runner_id: {
+		type: String,
+		required: true
+	},
 	first_name: {
 		type: String,
 		required: true
 	},
 	last_name: {
-		type: String,
-		required: true
+		type: String
+		// required: true
 	},
 	email: {
 		type: String,
@@ -21,6 +26,8 @@ var runnerSchema = mongoose.Schema({
 		type: String,
 	}
 });
+
+runnerSchema.plugin(findOrCreate);
 
 var Runner = module.exports = mongoose.model('Runner', runnerSchema);
 

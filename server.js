@@ -12,6 +12,7 @@ GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var Runner = require('./models/runner.js')
 var request = require("request");
 session = require('express-session');
+findOrCreate = require('mongoose-findorcreate');
 
 app.get('/json/:location', function(req, res) {
 	(function(){
@@ -132,7 +133,7 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
 
     if(profile){
-      userModel.findOrCreate({ googleId: profile.id }, {name: profile.displayName, email: profile.emails[0].value, access: 'Admin'}, function (err, user) {
+      Runner.findOrCreate({ runner_id: profile.id }, {first_name: profile.displayName, email: profile.emails[0].value, access: 'Admin'}, function (err, user) {
         return done(err, user);
       });
 
