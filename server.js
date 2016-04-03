@@ -131,38 +131,15 @@ passport.use(new GoogleStrategy({
   },
 
   function(accessToken, refreshToken, profile, done) {
-    /*
+
     if(profile){
-      Runner.findOrCreate({ runner_id: profile.id }, {first_name: profile.displayName, email: profile.emails[0].value}, function (err, user) {
+      Runner.findOrCreate({ runner_id: profile.id }, {runner_id: profile.id, first_name: profile.displayName, email: profile.emails[0].value}, function (err, user) {
         return done(err, user);
       });
 
     } else {
       return done(null, false); 
     }
-    */
-        //check user table for anyone with a facebook ID of profile.id
-        Runner.getRunnerById({
-            'runner_id': profile.id 
-        }, function(err, runner) {
-            if (err) {
-                return done(err);
-            }
-            //No user was found... so create a new user with values from Facebook (all the profile. stuff)
-            if (!runner) {
-                runner = new Runner({
-                    first_name: profile.displayName,
-                    email: profile.emails[0].value
-                });
-                user.save(function(err) {
-                    if (err) console.log(err);
-                    return done(err, user);
-                });
-            } else {
-                //found user. Return
-                return done(err, user);
-            }
-        });
   }
 
 ));
