@@ -10,7 +10,7 @@ myApp.config(function($routeProvider, FacebookProvider) {
 		controller: 'RunnersController',
 		templateUrl: 'views/newdashboard.html'
 	})
-	$routeProvider.when('/signup', {
+	$routeProvider.when('/host', {
 		controller: 'RunnersController',
 		templateUrl: 'views/add_runner.html'
 	})

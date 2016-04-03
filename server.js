@@ -131,9 +131,9 @@ passport.use(new GoogleStrategy({
   },
 
   function(accessToken, refreshToken, profile, done) {
-
+console.log('profile');
     if(profile){
-        console.log(profile);
+        
       Runner.findOrCreate({ runner_id: profile.id }, {first_name: profile.displayName, email: profile.emails[0].value}, function (err, user) {
         return done(err, user);
       });
@@ -152,6 +152,15 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
+
+//get current user
+app.get('/account', function(req, res){
+     if (req.isAuthenticated()) { 
+       res.send({user : req.user}); 
+     }else{
+       res.redirect('/login');
+     }
+   });
 
 
 

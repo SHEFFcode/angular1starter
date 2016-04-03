@@ -1,8 +1,11 @@
+<h2>Interested in Becoming a host?</h2>
+<p class="lead">Please fill out the form below to register to become a host.</p>
+
 <h2 class="sub-header">Add Runner</h2>
-<form ng-submit="addRunner()">
+<form ng-init="getCurrentRunner()" ng-submit="addRunner()">
 	<div class="form-group">
 		<label>First Name</label>
-		<input type="text" class="form-control" name="first_name" ng-model="runner.first_name" placeholder="First Name"></input>
+		<input type="text" class="form-control" name="first_name" ng-model="runner.first_name" placeholder="First Name">{{runner}}</input>
 	</div>
 	<div class="form-group">
 		<label>Last Name</label>
@@ -23,13 +26,3 @@
 	</div>
 	<button type="submit" class="btn btn-default">Submit</button>
 </form>
-
-<a href="#" onclick="signOut();">Sign out</a>
-<script>
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-</script>

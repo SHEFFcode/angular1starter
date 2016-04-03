@@ -10,6 +10,12 @@ myApp.controller('RunnersController', ['$scope', '$http', '$location', '$routePa
 		});
 	}
 
+	$scope.getCurrentRunner = function() {
+		$http.get('/account').success(function(response) {
+			$scope.runner = response;
+		})
+	}
+
 	//get customer details
 	$scope.getRunner = function() {
 		var id = $routeParams.id;
