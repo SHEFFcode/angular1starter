@@ -165,7 +165,7 @@ app.get('/auth/google',
 // logged in.  Otherwise, authentication has failed.
 app.get('/auth/google/callback', 
   passport.authenticate('google', 
-    { failureRedirect: '#/login',
+    { failureRedirect: '/#/login',
       successRedirect: '/#/dashboard'
     }
   )
