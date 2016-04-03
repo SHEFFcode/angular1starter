@@ -9,8 +9,10 @@
   "dependencies": {
     "body-parser": "*",
     "express": "*",
+    "express-session": "^1.13.0",
     "http-request": "^0.7.0",
     "mongoose": "*",
+    "node-uuid": "^1.4.7",
     "passport": "^0.3.2",
     "passport-google": "^0.3.0",
     "passport-google-oauth": "^1.0.0",

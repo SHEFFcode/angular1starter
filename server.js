@@ -5,11 +5,13 @@ var mongoose = require('mongoose');
 var PORT = process.env.PORT || 7000;
 var Yelp = require('yelp');
 var runners =	require('./routes/runners');
+var uuid = require('node-uuid');
 var runs = require('./routes/runs');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
+GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var Runner = require('./models/runner.js')
-var request = require("request")
+var request = require("request");
+session = require('express-session');
 
 app.get('/json/:location', function(req, res) {
 	(function(){
@@ -47,6 +49,9 @@ app.use(bodyParser.json());
 //Routes
 app.use('/api/runners', runners);
 app.use('/api/runs', runs);
+
+
+/* ======================= Google Authentication ========================================
 
 //Google Authentication
 
@@ -97,19 +102,76 @@ app.get('/auth/google/callback',
     res.redirect('http://localhost:7000/#/');
 });
 
+*/
 
-function loggedIn(req, res, next) {
+var passport = require('passport'), 
+ GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+
+
+//session configs
+app.use(session({
+  genid: function(req) {
+    return uuid() // use UUIDs for session IDs
+  },
+  secret: 'ch33rz!'
+}))
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+passport.use(new GoogleStrategy({
     
-    if (req.user) {
-        next();
+    clientID: '141240246742-scoggs7ot72a8lob81jpspv9v9ap0s3q.apps.googleusercontent.com',
+
+    clientSecret: 'QWJRpmIZ-WJNa4yXUBHvP38Z',
+
+    callbackURL: 'https://runandbrunch.herokuapp.com/auth/google/callback'
+  },
+
+  function(accessToken, refreshToken, profile, done) {
+
+    if(profile){
+      userModel.findOrCreate({ googleId: profile.id }, {name: profile.displayName, email: profile.emails[0].value, access: 'Admin'}, function (err, user) {
+        return done(err, user);
+      });
+
     } else {
-        res.redirect('#/login');
+      return done(null, false); 
     }
+  }
 
-}
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 
-app.get('/', loggedIn, function(req, res, next) {
+
+// Redirect the user to Google for authentication.  When complete, Google
+// will redirect the user back to the application at
+//     /auth/google/return
+app.get('/auth/google', 
+  passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
+
+// Google will redirect the user to this URL after authentication.  Finish
+// the process by verifying the assertion.  If valid, the user will be
+// logged in.  Otherwise, authentication has failed.
+app.get('/auth/google/callback', 
+  passport.authenticate('google', 
+    { failureRedirect: '#/login',
+      successRedirect: '#/dashboard'
+    }
+  )
+);
+
+
+app.get('/', function(req, res, next) {
     res.send('Hello world');
 });
 
