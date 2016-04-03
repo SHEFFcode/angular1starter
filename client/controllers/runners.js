@@ -12,7 +12,7 @@ myApp.controller('RunnersController', ['$scope', '$http', '$location', '$routePa
 
 	$scope.getCurrentRunner = function() {
 		$http.get('/account').success(function(response) {
-			$scope.runner = response;
+			$scope.runner = response.user;
 		})
 	}
 
