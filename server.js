@@ -171,6 +171,11 @@ app.get('/auth/google/callback',
   )
 );
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 
 app.get('/', function(req, res, next) {
     res.send('Hello world');
