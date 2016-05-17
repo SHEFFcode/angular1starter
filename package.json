@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "body-parser": "*",
+    "dotenv": "^2.0.0",
     "express": "*",
     "express-session": "^1.13.0",
     "http-request": "^0.7.0",
